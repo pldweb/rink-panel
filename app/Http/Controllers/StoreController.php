@@ -125,13 +125,12 @@ class StoreController extends Controller
     public function destroy(string $id)
     {
         try {
-            $user = $this->storeRepository->getById($id);
-            if (!$user) {
+            $store = $this->storeRepository->getById($id);
+            if (!$store) {
                 return ResponseHelper::jsonResponse(false, 'Data toko tidak ditemukan', null, 404);
             }
-
-            $store = $this->storeRepository->delete($id);
-            return ResponseHelper::jsonResponse(true, 'Data toko berhasil dihapus', new StoreResource($store), 201);
+            $store->delete();
+            return ResponseHelper::jsonResponse(true, 'Data toko berhasil dihapus', null, 201);
 
         }catch (\Exception $exception){
             return ResponseHelper::jsonResponse(false, $exception->getMessage(), null, 500);
