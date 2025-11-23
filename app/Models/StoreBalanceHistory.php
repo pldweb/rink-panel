@@ -6,7 +6,7 @@ use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class StoreBallanceHistory extends Model
+class StoreBalanceHistory extends Model
 {
     use UUID;
 
@@ -14,11 +14,11 @@ class StoreBallanceHistory extends Model
 
     public function storeBalance(): BelongsTo
     {
-        return $this->belongsTo(StoreBallance::class);
+        return $this->belongsTo(StoreBalance::class);
     }
 
-    public function storeBallanceHistories()
+    public function storeBalanceHistories()
     {
-        return $this->hasMany(StoreBallanceHistory::class);
+        return $this->hasMany(StoreBalanceHistory::class);
     }
 }

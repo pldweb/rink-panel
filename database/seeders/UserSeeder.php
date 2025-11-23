@@ -15,12 +15,6 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'email_verified_at' => now(),
-            'password' => bcrypt('password'),
-        ]);
         UserFactory::new()->count(15)->create();
     }
 }

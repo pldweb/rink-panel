@@ -18,6 +18,7 @@ class StoreFactory extends Factory
         $imageHelper = new ImageHelper;
 
         return [
+            'id' => $this->faker->uuid(),
             'user_id' => User::factory(),
             'name' => $this->faker->name(),
             'logo' => $imageHelper->storeAndResizeImage(

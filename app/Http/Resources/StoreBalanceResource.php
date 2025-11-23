@@ -5,16 +5,15 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class StoreBalanceResource extends JsonResource
 {
+
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone_number' => $this->phone_number,
-            'role' => 'member biasa'
+            'store' => new StoreResource($this->store),
+            'balance' => (float) (string) $this->balance,
         ];
     }
 }

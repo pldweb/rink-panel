@@ -30,9 +30,9 @@ class Product extends Model
         return $this->belongsTo(Store::class);
     }
 
-    public function storeBallance()
+    public function storeBalance()
     {
-        return $this->hasOne(StoreBallance::class);
+        return $this->hasOne(StoreBalance::class);
     }
 
    public function products()
