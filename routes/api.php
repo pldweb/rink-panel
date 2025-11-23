@@ -24,5 +24,8 @@ Route::apiResource('withdrawal', \App\Http\Controllers\WithdrawalController::cla
 Route::get('withdrawal/all/paginated', [\App\Http\Controllers\WithdrawalController::class, 'getAllPaginated']);
 Route::post('withdrawal/{id}/approve', [\App\Models\Withdrawal::class, 'approve']);
 
+Route::apiResource('buyer', \App\Http\Controllers\BuyerController::class);
+Route::get('buyer/all/paginated', [\App\Http\Controllers\BuyerController::class, 'getAllPaginated']);
+
 
 
