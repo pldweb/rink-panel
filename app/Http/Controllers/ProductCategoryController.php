@@ -7,7 +7,6 @@ use App\Http\Requests\ProductCategoryStoreRequest;
 use App\Http\Requests\ProductCategoryUpdateRequest;
 use App\Http\Resources\PaginateResource;
 use App\Http\Resources\ProductCategoryResource;
-use App\Http\Resources\UserResource;
 use App\Interfaces\ProductCategoryRepositoryInterface;
 use Illuminate\Http\Request;
 
