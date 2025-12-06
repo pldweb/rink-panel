@@ -103,6 +103,24 @@ class TransactionRepository implements TransactionRepositoryInterface
 
             DB::commit();
 
+            \Midtrans\Config::$serverKey = config('midtrans.serverKey');
+            \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+            \Midtrans\Config::$isSanitized = config('midtrans.isSanitized');
+            \Midtrans\Config::$is3ds = config('midtrans.is3ds');
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $transaction->code,
+                    'gross_amount' => $transaction->grand_total,
+                ),
+                'customer_details' => array(
+                    'first_name' => $transaction->buyer->name,
+                    'email' => $transaction->buyer->email,
+                )
+            );
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $transaction->snap_token = $snapToken;
+
             return $transaction;
         } catch (\Exception $exception) {
             DB::rollBack();

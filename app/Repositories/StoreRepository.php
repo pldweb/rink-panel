@@ -62,7 +62,7 @@ class StoreRepository implements StoreRepositoryInterface
             $store->postal_code = $data['postal_code'];
             $store->save();
 
-            $store->storeBallance()->create([
+            $store->storeBalance()->create([
                 'balance' => 0,
             ]);
 

@@ -25,8 +25,10 @@ return new class extends Migration
             $table->string('shipping_type');
             $table->decimal('shipping_cost', 26, 2);
             $table->string('tracking_number');
-            $table->string('tax');
-            $table->string('grand_total');
+            $table->string('delivery_proof')->nullable();
+            $table->enum('delivery_status', ['pending', 'processing', 'delivering', 'completed'])->default('pending');
+            $table->decimal('tax', 26, 2);
+            $table->decimal('grand_total', 26, 2);
             $table->enum('payment_status', ['unpaid', 'paid'])->default('unpaid');
             $table->timestamps();
         });

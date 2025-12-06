@@ -14,7 +14,7 @@ interface TransactionRepositoryInterface
 
     public function create(array $data);
 
-    //    public function update(string $id, array $data);
+    public function updateStatus(string $id, array $data);
 
     //    public function delete(string $id);
 }
