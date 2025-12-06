@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Traits\UUID;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
-    use UUID;
+    use HasUuids;
 
     protected $table = 'transactions';
 
@@ -32,6 +32,11 @@ class Transaction extends Model
         'tax' => 'decimal:2',
         'grand_total' => 'decimal:2',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        $query = $query->where('code', 'like', '%'.$search.'%');
+    }
 
     public function buyer()
     {

@@ -33,3 +33,7 @@ Route::get('product-category/slug/{slug}', [\App\Http\Controllers\ProductCategor
 Route::apiResource('product', \App\Http\Controllers\ProductController::class);
 Route::get('product/all/paginated', [\App\Http\Controllers\ProductController::class, 'getAllPaginated']);
 Route::get('product/slug/{slug}', [\App\Http\Controllers\ProductController::class, 'showBySlug']);
+
+Route::apiResource('transaction', \App\Http\Controllers\TransactionController::class);
+Route::get('transaction/all/paginated', [\App\Http\Controllers\TransactionController::class, 'getAllPaginated']);
+Route::apiResource('transaction/code/{code}', \App\Http\Controllers\TransactionController::class, 'showByCode');
