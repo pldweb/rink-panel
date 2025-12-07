@@ -55,6 +55,43 @@ class TransactionRepository implements TransactionRepositoryInterface
         return $query->first();
     }
 
+    public function delete(string $id)
+    {
+       DB::beginTransaction();
+        try {
+            $transaction = Transaction::find($id);
+            $transaction->delete();
+            DB::commit();
+            return $transaction;
+        }catch (Exception $e) {
+            DB::rollBack();
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function updateStatus(string $id, array $data)
+    {
+        DB::beginTransaction();
+        try {
+            $transaction = Transaction::find($id);
+            if (isset($data['tracking_number'])) {
+                $transaction->tracking_number = $data['tracking_number'];
+            }
+            if (isset($data['delivery_proof'])){
+                $transaction->delivery_proof = $data['delivery_proof']->store('assets/transaction'. 'public');
+            }
+            $transaction->delivery_status = $data['delivery_status'];
+            $transaction->save();
+
+            DB::commit();
+            return $transaction;
+        }catch (Exception $e){
+            DB::rollBack();
+            throw new Exception($e->getMessage());
+        }
+
+    }
+
     public function create(array $data)
     {
         DB::beginTransaction();

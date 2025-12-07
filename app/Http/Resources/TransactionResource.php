@@ -27,7 +27,7 @@ class TransactionResource extends JsonResource
             'shipping_type' => $this->shipping_type,
             'shipping_cost' => (float) (string) $this->shipping_cost,
             'tracking_number' => $this->trackig_number,
-            'delivery_proof' => $this->delivery_proof,
+            'delivery_proof' => asset('storage/' . $this->delivery_proof),
             'delivery_status' => $this->delivery_status,
             'tax' => (float) (string) $this->tax,
             'grand_total' => (float) (string) $this->grand_total,

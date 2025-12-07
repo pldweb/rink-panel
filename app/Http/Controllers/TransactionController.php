@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\ResponseHelper;
 use App\Http\Requests\TransactionStoreRequest;
+use App\Http\Requests\TransactionUpdateRequest;
 use App\Http\Resources\PaginateResource;
 use App\Http\Resources\TransactionResource;
 use App\Interfaces\TransactionRepositoryInterface;
@@ -95,16 +96,39 @@ class TransactionController extends Controller
         }
     }
 
-    public function update(Request $request, string $id)
+    public function update(TransactionUpdateRequest $request, string $id)
     {
-        //
+        $request = $request->validated();
+        try {
+            $transaction = $this->transactionRepository->getById($id);
+
+            if (! $transaction) {
+                return ResponseHelper::jsonResponse(false, 'Data transaksi gagal ditemukan', null, 404);
+            }
+
+            $transaction = $this->transactionRepository->updateStatus($id, $request);
+            return ResponseHelper::jsonResponse(true, 'Data transaksi berhasil diupdate', new TransactionResource($transaction), 200);
+
+        } catch (\Exception $exception) {
+            return ResponseHelper::jsonResponse(false, $exception->getMessage(), null, 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        try {
+            $transaction = $this->transactionRepository->getById($id);
+
+            if (!$transaction) {
+                return ResponseHelper::jsonResponse(false, 'Data transaksi gagal ditemukan', null, 404);
+            }
+
+            $transaction = $this->transactionRepository->delete($id);
+            return ResponseHelper::jsonResponse(true, 'Data transaksi berhasil dihapus', new TransactionResource($transaction), 200);
+
+        } catch (\Exception $exception) {
+            return ResponseHelper::jsonResponse(false, $exception->getMessage(), null, 500);
+        }
     }
 }

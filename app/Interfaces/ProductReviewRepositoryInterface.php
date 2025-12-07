@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface TransactionRepositoryInterface
+interface ProductReviewRepositoryInterface
 {
     public function getAll(?string $search, ?int $limit, bool $execute);
 
